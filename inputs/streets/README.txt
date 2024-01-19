@@ -1,0 +1,1 @@
+Move files out of folders to choose which one you are using. Always make sure to move all files. Then, you know which is current out based on which folder is empty.
