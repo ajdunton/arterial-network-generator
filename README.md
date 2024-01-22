@@ -34,17 +34,19 @@ The arterial network is a subtree of the mainline tree network that spans all th
 - ls_weight_method = 'hyrbid-elev': the weight of each directed edge is the distance multiplied by a factor that accounts for the elevation of the destination node (i.e., downward flow is preferred). See Dunton and Gardoni (2023) for the formulation of this weight.
 
 # Generating Multiple Networks for Risk Analysis of Unknown Infrastructure to Localized Damage
-We generate multiple realizations of the network topology by applying multiplicative random error to the edge weights in Step 3. We use a lognormal distribution with mean = 1 and various values of standard deviation (i.e., sensitivity analysis). See Dunton and Gardoni (2023) for a description of why this method is appropriate for estimating the probability of disconnection of each of the subareas given localized damage. For example, producing the following maps:
+We generate multiple realizations of the network topology by applying multiplicative random error to the edge weights in Step 3. The number of realizations to be generated is specified in params.py as *number_realizations*. We use a lognormal distribution with mean = 1 and various values of standard deviation (i.e., sensitivity analysis). See Dunton and Gardoni (2023) for a description of why this method is appropriate for estimating the probability of disconnection of each of the subareas given localized damage. For example, producing the following map:
 
 # Reference
 See the following paper for further details about this procedure and case study:
 
 Dunton, A., and Gardoni, P. (2023). Developing digital twins of infrastructure for risk analysis. 14th International Conference on Applications of Statistics and Probability in Civil Engineering (ICASP14), Dublin, Ireland, 2023.
 
-# Additional Analysis
-In addition to the analysis in Dunton and Gardoni (2023), the arterial network generator can be used for additional analysis. We include some description of additional analysis here.
+# Additional Functionality
+The arterial network generator can be used for additional analysis that was not included in Dunton and Gardoni (2023). We include some description of additional analysis here.
 
 ## Known Infrastructure Lines
+We consider the effect of known infrastructure lines, specifically if a portion of the network extending from the treatment plant is known. We reduce the weights of the edges that are known arterial infrastructure lines to almost 0 by multiplying by a factor specified in params.py as *known_weight_ratio*. For example, when a mainline (shown below in green) is known to extend to the west of the study area, the extent of disconnection is likely much smaller than the extent shown above.
 
 ## Integrating with the Capillary Network Generator
-Note that this program interfaces well with the capillary network generator available at __
+We integrate this arterial network generator procedure with our previously-published capillary network generator (https://github.com/ajdunton/capillary-network-generator). For each subarea, we clip the input data needed for the capillary network generator to the subarea extent. We then generate the capillary topology. We assess how the results for the risk analysis change when we consider the capillary topology. In general, for the case study location and a single network generated, only 62 additional buildings of the 42,605 in the study area were disconnected when capillary networks were generated. The figure below demonstrates a specific location where there was some difference in the building-level results. Overall, this result indicates that if the subareas are defined at the resolution that we used for the case study, the effect of the capillary networks on the building-level results is negligible, and the above analysis is valid.
+
