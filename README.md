@@ -15,11 +15,13 @@ The inputs, in the input directory, are listed below. Included in this repositor
 # Procedure
 The following is a brief overview of the 3-step procedure that is implemented in script.py. Note that params.py and funcs.py are modules that are imported into script.py. These modules contain parameters/constants and functions, respectively.
 
-## 1. 
+## 1. Identify Subareas
+Preliminary subareas are identified based on the mainline street network. However, the non-mainline street network in each preliminary subarea may be disconnected, either from the raw data or from manual pre-processing as described in Dunton and Gardoni (2023). Each connected component of the non-mainline street network corresponds to a different capillary infrasrtructure network. We define one final subarea for each connected component of the non-mainline street network in each preliminary subarea.
 
-## 2.
+## 2. Identify Arterial Nodes (i.e., Outlets for Wastewater Networks)
 
-## 3.
+## 3. Identify Arterial Network Topology
+
 
 # Reference
 See the following paper for further details about this procedure and results for the case study:
